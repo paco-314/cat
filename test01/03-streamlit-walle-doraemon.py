@@ -19,11 +19,10 @@ def load_model():
         pathlib.PosixPath = pathlib.WindowsPath
     
     try:
-        model = learn.load("Felidae_walle_model.pkl")
 
-        # model_path = pathlib.Path(__file__).parent / "Felidae_walle_model.pkl"
-        # model = load_learner(model_path)
-        # print(f"模型路径：{model_path}")
+        model_path = pathlib.Path(__file__).parent / "Felidae_walle_model.pkl"
+        model = load_learner(model_path)
+        print(f"模型路径：{model_path}")
     finally:
         # 恢复原始设置
         if sys.platform == "win32" and temp is not None:
