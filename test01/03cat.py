@@ -9,17 +9,13 @@ if sys.version_info >= (3, 13):
 from fastai.vision.all import *
 import pathlib
 
-@st.cache_resource
+@st.cache_resource(ttl=0)  # 禁用缓存
 def load_model(uploaded_file=None):
-    """加载并缓存模型"""
     if uploaded_file:
-        # 使用上传的文件，而不是固定路径
         model = load_learner(uploaded_file)
     else:
-        # 固定路径
         model_path = pathlib.Path(__file__).parent / "Felidae_walle_model.pkl"
         model = load_learner(model_path)
-    
     return model
 
 # 主应用
