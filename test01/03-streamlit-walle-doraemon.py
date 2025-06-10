@@ -21,14 +21,15 @@ def load_model():
     try:
         model_path = pathlib.Path(__file__).parent / "Felidae_walle_model.pkl"
         model = load_learner(model_path)
+        print(f"模型路径：{model_path}")
     finally:
         # 恢复原始设置
         if sys.platform == "win32" and temp is not None:
             pathlib.PosixPath = temp
     
     return model
-print(f"模型路径：{model_path}")
-model = load_learner(model_path)
+
+
 # 主应用
 st.title("图像分类应用")
 st.write("上传一张图片，应用将预测对应的标签。")
