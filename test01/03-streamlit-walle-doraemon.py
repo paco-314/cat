@@ -27,7 +27,8 @@ def load_model():
             pathlib.PosixPath = temp
     
     return model
-
+print(f"模型路径：{model_path}")
+model = load_learner(model_path)
 # 主应用
 st.title("图像分类应用")
 st.write("上传一张图片，应用将预测对应的标签。")
