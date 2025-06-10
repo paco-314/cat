@@ -10,21 +10,15 @@ from fastai.vision.all import *
 import pathlib
 
 @st.cache_resource
-def load_model():
+def load_model(uploaded_file=None):
     """加载并缓存模型"""
-    # Windows 路径兼容性处理
-    temp = None
-    if sys.platform == "win32":
-        temp = pathlib.PosixPath
-        pathlib.PosixPath = pathlib.WindowsPath
-    
-    try:
+    if uploaded_file:
+        # 使用上传的文件，而不是固定路径
+        model = load_learner(uploaded_file)
+    else:
+        # 固定路径
         model_path = pathlib.Path(__file__).parent / "Felidae_walle_model.pkl"
         model = load_learner(model_path)
-    finally:
-        # 恢复原始设置
-        if sys.platform == "win32" and temp is not None:
-            pathlib.PosixPath = temp
     
     return model
 
